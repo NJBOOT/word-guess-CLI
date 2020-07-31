@@ -10,9 +10,8 @@ function Word(word) {
 
         for (var i = 0; i < wordArr.length; i++) {
             let letter = new Letter(wordArr[i])
-            this.objArray.push(letter)
+            this.objArray.push(letter)  
         }
-
         // wordArr.forEach(function (element) {
         //     let letter = new Letter(element)
         //     this.objArray.push(letter)
@@ -24,22 +23,23 @@ function Word(word) {
             displayWord += this.objArray[i].display()
         }
         return displayWord
+        console.log(displayWord)
     }
     this.guessLetter = function (guessChar) {
-
+        var found = false
         for (var i = 0; i < this.objArray.length; i++) {
-            this.objArray[i].checker(guessChar)
+            if (this.objArray[i].checker(guessChar))
+                found = true
         }
-
+        if (found) return true;
+        else return false;
+        
     }
 }
 
+// let test = new Word("testing")
+
+// test.guessLetter("t")
+// test.updateDisplay()
+// test.makeWord()
 module.exports = Word;
-
-// * **Word.js**: Contains a constructor, Word that depends on the Letter constructor. This is used to create an object representing the current word the user is attempting to guess. That means the constructor should define:
-
-//   * An array of `new` Letter objects representing the letters of the underlying word
-
-//   * A function that returns a string representing the word. This should call the function on each letter object (the first function defined in `Letter.js`) that displays the character or an underscore and concatenate those together.
-
-//   * A function that takes a character as an argument and calls the guess function on each letter object (the second function defined in `Letter.js`)
